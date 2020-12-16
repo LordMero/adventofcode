@@ -41,29 +41,38 @@ def count_trees(input, right, down):
     return count
 
 
-def parse_passports(pass_file):
+def parse_passports(passpts):
 
-    f = open(pass_file)
-    passpts = f.read().splitlines()
-
-    pass_list, pass_temp = [], []
+    pass_list, pass_temp, out  = [], [], []
 
     for p in passpts:
-        if len(p) == 0
+        if len(p) == 0:
             pass_list.append(pass_temp)
             pass_temp = []
             continue
         else:
-            pass_list.append(p)
+            pass_temp.append(p)
+            
+   
+    for l in pass_list:
+        out_dic = {}
+        for p in l:
+            fields = p.split(' ')
+            for f in fields:
+                t = f.split(':')
+                out_dic[t[0]] = t[1]
+        
+        out.append(out_dic)
+        
 
-    for p in pass_list:
-        for f in p:
-            fields = f.split(' ')
+    return out
 
 
-    
+def validate_passports(pass_list, valid_fieds):
+    pass
 
 
-    return p
+
+
 
 
