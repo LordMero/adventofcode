@@ -2,6 +2,7 @@ import os
 import numpy as np 
 from tqdm.auto import tqdm, trange
 from time import sleep 
+from termcolor import colored
 
 def read_file(name):
     f = open(name)
@@ -10,29 +11,31 @@ def read_file(name):
     return input
 
 
-def count_trees(input, right, down, n_sleep=None):
+def count_trees(input, right, down):
+    lenght_map = len(input)
+    total_move = (lenght_map // down + 1) * right
+    lenght_line = len(input[0])
+
+    extention = int(np.ceil(total_move / lenght_line))
+
     count = j = 0
 
-    for l in (t := trange(len(input)-down)):
-        cursor = j+right
-        line = input[l+down]
+    for line in (t:= trange(down, len(input), down)):
+        cursor = j + right
 
-        rep = None
-        if cursor >= len(line):
-            rep = np.ceil(cursor / len(line))
-            line *= int(rep)+50
+        raw = input[line]
         
-        if n_sleep is not None: 
-            sleep(n_sleep)
+        # extend line
+        raw *= extention
+       
+        m = raw[cursor]
 
-        m = line[cursor]
-        
         if m == '#':
-            count += 1
-        
+            count +=1
+
         j += right
+        
+        #sleep(8)
+        t.set_description(f'Ext {extention}. Down {line}, right  {cursor}, found {m}')
 
-        t.set_description(f'Line {l+1}, cursor {cursor}, rep {rep}, found {m}')
-         
     return count
-
