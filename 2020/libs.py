@@ -68,10 +68,22 @@ def parse_passports(passpts):
     return out
 
 
-def validate_passports(pass_list, valid_fieds):
-    pass
+def validate_passports(pass_list, valid_fields):
+        
+    v = set(valid_fields)
 
+    valid, counter = [], []
+    
+    for p in pass_list:
+        
+        k = set(list(p.keys()))
 
+        if len(v-k) == 0:
+            valid.append(p)
+        elif v-k == set(['cid']):
+            counter.append(p)
+    
+    return valid, counter
 
 
 
