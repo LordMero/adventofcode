@@ -39,3 +39,31 @@ def count_trees(input, right, down):
         t.set_description(f'Ext {extention}. Down {line}, right  {cursor}, found {m}')
 
     return count
+
+
+def parse_passports(pass_file):
+
+    f = open(pass_file)
+    passpts = f.read().splitlines()
+
+    pass_list, pass_temp = [], []
+
+    for p in passpts:
+        if len(p) == 0
+            pass_list.append(pass_temp)
+            pass_temp = []
+            continue
+        else:
+            pass_list.append(p)
+
+    for p in pass_list:
+        for f in p:
+            fields = f.split(' ')
+
+
+    
+
+
+    return p
+
+
