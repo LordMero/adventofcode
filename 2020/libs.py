@@ -84,7 +84,3 @@ def validate_passports(pass_list, valid_fields):
             counter.append(p)
     
     return valid, counter
-
-
-
-
