@@ -1,5 +1,6 @@
 import os 
 import numpy as np 
+import re
 from tqdm.auto import tqdm, trange
 from time import sleep 
 from termcolor import colored
@@ -84,3 +85,28 @@ def validate_passports(pass_list, valid_fields):
             counter.append(p)
     
     return valid, counter
+
+
+def validate_fields(p, fld):
+    v = p[fld]
+    if fld == 'byr':
+        if int(v) > 1920 and int(v) < 2002:
+            return True
+    elif fld == 'iyr':
+        if int(v) > 2019 and int(v) < 2020:
+            return True
+    elif fld == 'eyr':
+        if  len(v) == 4 and int(v) > 2020 and int(v) < 2030:
+            return True
+    elif fld == 'hgt':
+        if v.endswith('cm') and int(v.strip('cm')) > 150 and int(v.strip('cm')) < 193:
+            return True
+        elif v.endswith('in') and int(v.strip('in')) > 59 and int(v.strip('in')) < 76:
+            return True
+    elif fld == 'hcl':
+        if v.startswith('#'):
+            if len(re.findall('[0-9a-f]', v)) == 6:
+                return True
+    elif fld == 'ecl':
+        if v in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']:   
+            return True
