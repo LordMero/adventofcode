@@ -1,8 +1,9 @@
 from libs import read_file
+from collections import Counter
 
 
-#group_list = read_file('input.txt')
-group_list = read_file('test.txt')
+group_list = read_file('input.txt')
+#group_list = read_file('test.txt')
 
 def parse_groups(group_list):
     
@@ -35,14 +36,13 @@ def parse_groups(group_list):
 groups = parse_groups(group_list)
 
 print(groups)
+
 s = 0
-for g in groups: 
-    print(s)
-    if g['people'] == 1:
-        s += len(g['list'])
-    elif g['people'] > 1:
-        c = [g['list'].count(i) for i in g['list']]
-        c = set(c).pop()
-        if c > 1:    s += c
-        
+for g in groups:
+    c = Counter(g['list'])
+    print(c)
+    for k,v in c.items():
+        print(k, v)
+        if v == g['people']:
+            s += 1
 print(s)
